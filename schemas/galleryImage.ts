@@ -11,7 +11,7 @@ export default defineType({
       type: "string",
     }),
     defineField({
-      name: "image",
+      name: "mainImage",
       title: "Image",
       type: "image",
       options: {
@@ -19,9 +19,20 @@ export default defineType({
       },
     }),
     defineField({
+      name: "categories",
+      title: "Categories",
+      type: "array",
+      of: [{ type: "reference", to: { type: "category" } }],
+    }),
+    defineField({
+      name: "link",
+      title: "Link",
+      type: "url",
+    }),
+    defineField({
       name: "caption",
       title: "Caption",
-      type: "text",
+      type: "string",
     }),
     defineField({
       name: "attribute",

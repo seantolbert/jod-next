@@ -10,6 +10,16 @@ function ClientSideRoute({
   children: React.ReactNode;
   route: string;
 }) {
-  return <Link href={route}>{children}</Link>;
+  console.log(route);
+
+  return (
+    <Link
+      // target={route[0] == '/' && route.length > 1 ? "" : "_blank"}
+      // className={route.length > 1 ? "cursor-pointer" : "cursor-auto"}
+      href={route}
+    >
+      {children}
+    </Link>
+  );
 }
 export default ClientSideRoute;

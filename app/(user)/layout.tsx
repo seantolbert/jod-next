@@ -18,9 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="mx-auto bg-[#E7DFC6]">
+      <body className="mx-auto bg-[#eae7d3] text-gray-700 ">
         <Navbar />
-        {/* <Banner /> */}
         {children}
         <Footer />
       </body>

@@ -1,6 +1,8 @@
 import "../../styles/globals.css";
 import Navbar from "@/components/Navbar";
 
+
+
 export const metadata = {
   title: "Jungles of Dorado",
   description:

@@ -11,12 +11,11 @@ const useWindowSize = (): WindowSize => {
     height: window.innerHeight,
   });
 
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+
   useEffect(() => {
     const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+      setWindowWidth()
     };
 
     window.addEventListener("resize", handleResize);

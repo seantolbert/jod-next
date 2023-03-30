@@ -4,18 +4,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { Bars4Icon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import useWindowSize from "@/hooks/useWindowSize";
+import Router from "next/router";
+
+// import useSanitySearch from "@/hooks/useSanitySearch";
 
 function Navbar(): JSX.Element {
-  const router = usePathname();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
+  const [query, setQuery] = useState<string>("");
+  // const [options, setOptions] = useState<SearchOptions>({ limit: 10 });
+  // const { results, isLoading, error } = useSanitySearch(query, options);
+  const path = usePathname();
   const { width } = useWindowSize();
+  const router = useRouter();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
 
-  const [searchOpen, setSearchOpen] = useState(false);
+  const handleSearchSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    router.push(`/search?${encodeURIComponent(query)}`);
+  };
 
   const navOptions = [
     { name: "Home", route: "/" },
@@ -44,27 +58,29 @@ function Navbar(): JSX.Element {
           )}
         </div>
         <div className="flex gap-6">
+          {/*  */}
+          {/* search */}
           {searchOpen && (
-            <div className="relative group">
+            <form onSubmit={handleSearchSubmit} className="relative group">
               <input
                 type="text"
                 className="bg-transparent transition-transform duration-100 pb-2 outline-none"
+                onChange={handleInputChange}
+                value={query}
               />
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.3, ease: "easeIn" }}
-                className="w-full h-0.5 absolute bottom-0 bg-black rounded-full  origin-right"
+                className="w-full h-0.5 absolute bottom-0 bg-black rounded-full origin-right"
               />
-            </div>
+            </form>
           )}
+          {/*  */}
+
           <button onClick={() => setSearchOpen(!searchOpen)}>
             <MagnifyingGlassIcon className="w-6 h-6" />
           </button>
-
-          {/*  */}
-          {/* width ternary for hambergur vs nav options */}
-          {/*  */}
 
           {width < 720 ? (
             <button onClick={() => setIsOpen(!isOpen)}>
@@ -76,7 +92,7 @@ function Navbar(): JSX.Element {
                 <li
                   key={key}
                   className={`text-gray-500 pb-2 ${
-                    router === option.route &&
+                    path === option.route &&
                     "border-b-4 border-b-gray-800 text-gray-800 rounded"
                   }`}
                 >
@@ -104,7 +120,7 @@ function Navbar(): JSX.Element {
                 <Link
                   href={option.route}
                   className={`${
-                    router === option.route &&
+                    path === option.route &&
                     "border-b-4 border-b-gray-700 rounded pb-2"
                   }`}
                 >

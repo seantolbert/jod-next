@@ -11,8 +11,11 @@ const useSanitySearch = ({ query }: any, options = {}) => {
     setIsLoading(true);
 
     const groqQuery = groq`
-        *[_type in ['galleryImage', 'post', 'project']] | order(_createdAt desc)
-    `;
+    *[_type in ['post', 'galleryImage', 'project']] {
+        ...,
+        categories[]->,
+    } | order(_createdAt desc)
+        `;
 
     const search = async () => {
       try {

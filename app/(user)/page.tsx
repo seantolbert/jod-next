@@ -8,13 +8,18 @@ const query = groq`
   *[_type=='galleryImage'] {
     ...,
     categories[]->
-  } | order(_craetedAt desc)
+  } | order(_createdAt desc)
 `;
 
-export const revalidate = 300;
+
 
 export default async function HomePage() {
+  
   const photos = await client.fetch(query);
 
-  return <Gallery photos={photos} />;
+  return (
+    <>
+      <Gallery photos={photos} />
+    </>
+  );
 }

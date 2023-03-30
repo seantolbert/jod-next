@@ -28,7 +28,7 @@ function BlogList({ posts }: Props) {
               month: "long",
               year: "numeric",
             })}
-            <div>{post.description}</div>
+            <div className="line-clamp-2">{post.description}</div>
           </div>
         </ClientSideRoute>
       ))}

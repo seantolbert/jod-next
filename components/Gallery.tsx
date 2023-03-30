@@ -10,10 +10,8 @@ type Props = {
 
 function Gallery({ photos }: Props) {
   return (
-    <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
+    <div className="columns-2 md:columns-3 lg:columns-4 gap-4 px-4">
       {photos.map((photo) => {
-        console.log(photo.link);
-
         return (
           <Link
             href={photo.link === undefined ? "#" : photo.link}

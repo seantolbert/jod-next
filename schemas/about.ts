@@ -6,9 +6,22 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+    }),
+    defineField({
       name: "excerpt",
       title: "Excerpt",
       type: "text",
+    }),
+    defineField({
+      name: "image",
+      title: "Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: "email",

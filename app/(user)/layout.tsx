@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import "../../styles/globals.css";
+import useWindowSize from "@/hooks/useWindowSize";
 import Navbar from "@/components/Navbar";
 
 export const metadata = {
@@ -18,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="mx-auto bg-[#eae7d3] text-gray-700 ">
+      <body className="mx-auto min-h-screen flex flex-col justify-between bg-[#eae7d3] text-gray-700 ">
         <Navbar />
         {children}
         <Footer />

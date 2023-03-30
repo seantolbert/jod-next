@@ -5,6 +5,7 @@ import { schemaTypes } from "./schemas";
 import { myTheme } from "./theme";
 import StudioNavBar from "./components/StudioNavBar";
 import Logo from "./components/Logo";
+import { getDefaultDocumentNode } from "./structure";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
@@ -15,7 +16,12 @@ export default defineConfig({
   title: "Content Studio",
   projectId,
   dataset,
-  plugins: [deskTool(), visionTool()],
+  plugins: [
+    deskTool({
+      defaultDocumentNode: getDefaultDocumentNode,
+    }),
+    visionTool(),
+  ],
 
   schema: {
     types: schemaTypes,
@@ -24,8 +30,8 @@ export default defineConfig({
   studio: {
     components: {
       navbar: StudioNavBar,
-      logo: Logo
-    }
+      logo: Logo,
+    },
   },
-  theme: myTheme
+  theme: myTheme,
 });

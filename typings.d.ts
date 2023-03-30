@@ -1,5 +1,3 @@
-import { StringLiteral } from "typescript";
-
 type Base = {
   _createdAt: string;
   _id: string;
@@ -69,4 +67,36 @@ interface MainImage {
 interface Title {
   _type: "string";
   current: string;
+}
+
+interface Project extends Base {
+  title: string;
+  description: string;
+  categories: Category[];
+}
+
+interface SearchResult {
+  title: string;
+  _id: string;
+  image?: Image;
+  description: string;
+}
+
+interface SearchResults {
+  results: SearchResult[];
+}
+
+interface SearchOptions {
+  limit?: number;
+  offset?: number;
+}
+
+interface UseSanitySearchResult {
+  results: SearchResult[];
+  isLoading: boolean;
+  error?: Error;
+}
+
+interface UseSanitySearch {
+  (query: string, options?: SearchOptions): UseSanitySearchResult;
 }
